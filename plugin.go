@@ -17,7 +17,6 @@ import (
 type (
 	// Config holds input parameters for the plugin
 	Config struct {
-		Actions          []string
 		Sensitive        bool
 		RoleARN          string
 	}
