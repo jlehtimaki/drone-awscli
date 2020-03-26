@@ -17,8 +17,9 @@ import (
 type (
 	// Config holds input parameters for the plugin
 	Config struct {
-		Sensitive        bool
-		RoleARN          string
+		Sensitive       bool
+		RoleARN         string
+		Shell           bool
 	}
 
 	AWSCli struct {
@@ -55,7 +56,12 @@ func (p Plugin) Exec() error {
 	commands = append(commands, exec.Command(awsCliExe, "--version"))
 
 	// Set user defined command
-	commands = append(commands, exec.Command(awsCliExe, strings.Split(p.AWSCli.Command," ")...))
+	if p.Config.Shell {
+		commands = append(commands, exec.Command(
+			"bash", "-c", fmt.Sprintf("%s %s", awsCliExe, p.AWSCli.Command)))
+	} else {
+		commands = append(commands, exec.Command(awsCliExe, strings.Split(p.AWSCli.Command," ")...))
+	}
 
 	// Run commands
 	for _, c := range commands {

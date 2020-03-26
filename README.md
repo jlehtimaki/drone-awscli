@@ -19,7 +19,7 @@ docker build --rm=true -t lehtux/drone-awscli .
 
 ## Usage
 ```
-docker run --rm lehtux/drone-awscli -e AWS_ACCESS_KEY=.... -e -e AWS_SECRET_KEY=.... -e PLUGIN_COMMAND="sts get-caller-identity"
+docker run --rm lehtux/drone-awscli -e AWS_ACCESS_KEY=.... -e AWS_SECRET_KEY=.... -e PLUGIN_COMMAND="sts get-caller-identity"
 ```
 
 ## Parameters
@@ -29,3 +29,4 @@ docker run --rm lehtux/drone-awscli -e AWS_ACCESS_KEY=.... -e -e AWS_SECRET_KEY=
 | AWS_SECRET_KEY        | AWS Access key secret         | YES
 | PLUGIN_ASSUME_ROLE    | AWS Assume role               | NO
 | PLUGIN_COMMAND        | AWS Client command to be run  | YES
+| PLUGIN_SHELL          | Run AWS Cli in bash shell     | NO

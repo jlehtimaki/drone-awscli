@@ -36,6 +36,12 @@ func main() {
       Usage:   "AWSCli command to be run",
       EnvVar:  "PLUGIN_COMMAND",
     },
+    cli.StringFlag{
+      Name:     "shell",
+      Usage:    "Run awscli in shell",
+      EnvVar:   "PLUGIN_SHELL",
+      Value:    "false",
+    },
   }
 
   if err := app.Run(os.Args); err != nil {
@@ -47,6 +53,7 @@ func run(c *cli.Context) error {
   plugin := Plugin{
     Config: Config{
       RoleARN:          c.String("assume_role"),
+      Shell:            c.Bool("shell"),
     },
     AWSCli: AWSCli{
       Version:          c.String("awscli_version"),
