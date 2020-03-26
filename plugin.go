@@ -58,7 +58,7 @@ func (p Plugin) Exec() error {
 	// Set user defined command
 	if p.Config.Shell {
 		commands = append(commands, exec.Command(
-			"bash", "-c", fmt.Sprintf("%s %s", awsCliExe, p.AWSCli.Command)))
+			"bash", "-c", p.AWSCli.Command))
 	} else {
 		commands = append(commands, exec.Command(awsCliExe, strings.Split(p.AWSCli.Command," ")...))
 	}
