@@ -31,7 +31,7 @@ func main() {
       Usage:  "AWSCli version number",
       EnvVar: "PLUGIN_AWSCLI_VERSION",
     },
-    cli.StringFlag{
+    cli.StringSliceFlag{
       Name:    "awscli_commands",
       Usage:   "AWSCli commands to be run",
       EnvVar:  "PLUGIN_COMMANDS",
