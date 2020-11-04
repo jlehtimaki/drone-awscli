@@ -24,7 +24,7 @@ type (
 
 	AWSCli struct {
 		Version         string
-		Command         string
+		Commands        []string
 	}
 
 	// Plugin represents the plugin instance to be executed
@@ -56,11 +56,13 @@ func (p Plugin) Exec() error {
 	commands = append(commands, exec.Command(awsCliExe, "--version"))
 
 	// Set user defined command
-	if p.Config.Shell {
-		commands = append(commands, exec.Command(
-			"bash", "-c", fmt.Sprintf("%s %s", awsCliExe, p.AWSCli.Command)))
-	} else {
-		commands = append(commands, exec.Command(awsCliExe, strings.Split(p.AWSCli.Command," ")...))
+	for _, command := range p.AWSCli.Commands {
+		if p.Config.Shell {
+			commands = append(commands, exec.Command(
+				"bash", "-c", command))
+		} else {
+			commands = append(commands, exec.Command(command))
+		}
 	}
 
 	// Run commands

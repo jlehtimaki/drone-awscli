@@ -32,9 +32,9 @@ func main() {
       EnvVar: "PLUGIN_AWSCLI_VERSION",
     },
     cli.StringFlag{
-      Name:    "awscli_command",
-      Usage:   "AWSCli command to be run",
-      EnvVar:  "PLUGIN_COMMAND",
+      Name:    "awscli_commands",
+      Usage:   "AWSCli commands to be run",
+      EnvVar:  "PLUGIN_COMMANDS",
     },
     cli.StringFlag{
       Name:     "shell",
@@ -57,7 +57,7 @@ func run(c *cli.Context) error {
     },
     AWSCli: AWSCli{
       Version:          c.String("awscli_version"),
-      Command:          c.String("awscli_command"),
+      Commands:          c.StringSlice("awscli_commands"),
     },
   }
 
